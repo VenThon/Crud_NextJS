@@ -1,0 +1,21 @@
+import React from 'react';
+import RemoveBtn from './RemoveBtn';
+import Link from 'next/link';
+import {HiPencilAlt} from "react-icons/hi"
+
+export default function TopicList() {
+  return (
+    <div>
+      <div>
+         <h2>Topic Title</h2>
+         <div>Description</div>
+      </div>
+      <div>
+        <RemoveBtn />
+        <Link href={'/editTopic/123'}>
+            <HiPencilAlt size={24} />
+        </Link>
+      </div>
+    </div>
+  );
+}
