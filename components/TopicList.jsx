@@ -8,7 +8,7 @@ export default function TopicList() {
     <div>
       <div>
          <h2>Topic Title</h2>
-         <div>Description</div>
+         <div>Descriptions</div>
       </div>
       <div>
         <RemoveBtn />
