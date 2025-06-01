@@ -3,19 +3,42 @@ import RemoveBtn from './RemoveBtn';
 import Link from 'next/link';
 import {HiPencilAlt} from "react-icons/hi"
 
-export default function TopicList() {
+const getTopicsApi = async() => {
+  try {
+   const res = await fetch("http://localhost:3000/api/topics", {
+      cache: "no-store",
+
+    });
+    if(!res.ok){
+      throw new Error("Failed to fetch api list topic. ")
+    }
+    return res.json();
+    
+  } catch (error) {
+    console.log("Error loading topic: ", error)
+    
+  }
+}
+
+export default async function TopicList() {
+
+  const {topics} = await getTopicsApi();
   return (
-    <div className="p-4 border-slate-300 border items-start my-3 flex justify-between">
-      <div>
-         <h2 className="font-bold text-2xl">Topic Title</h2>
-         <div>Descriptions</div>
+    <>
+    {topics.map(t => (
+      <div className="p-4 border-slate-300 border items-start my-3 flex justify-between">
+        <div>
+          <h2 className="font-bold text-2xl">{t.title}</h2>
+          <div>{t.description}</div>
+        </div>
+        <div className="flex gap-2">
+          <RemoveBtn id={t._id} />
+          <Link href={`/editTopic/${t._id}`} className="text-blue-500">
+              <HiPencilAlt size={24} />
+          </Link>
+        </div>
       </div>
-      <div className="flex gap-2">
-        <RemoveBtn />
-        <Link href={'/editTopic/123'} className="text-blue-500">
-            <HiPencilAlt size={24} />
-        </Link>
-      </div>
-    </div>
+    ))}
+    </>
   );
 }
