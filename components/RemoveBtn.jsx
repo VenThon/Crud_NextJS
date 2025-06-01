@@ -1,9 +1,10 @@
 import React from 'react';
+import { HiOutlineTrash } from 'react-icons/hi';
 
 export default function RemoveBtn() {
   return (
     <div>
-      <h1>RemoveBtn</h1>
+      <button className="text-red-500"> <HiOutlineTrash size={24} /></button>
     </div>
   );
 }
