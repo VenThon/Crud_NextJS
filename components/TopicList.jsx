@@ -22,11 +22,11 @@ const getTopicsApi = async() => {
 
 export default async function TopicList() {
 
-  const {topics} = await getTopicsApi();
+  const { topics } = await getTopicsApi();
   return (
     <>
     {topics.map(t => (
-      <div className="p-4 border-slate-300 border items-start my-3 flex justify-between">
+      <div key={t._id} className="p-4 border-slate-300 border items-start my-3 flex justify-between">
         <div>
           <h2 className="font-bold text-2xl">{t.title}</h2>
           <div>{t.description}</div>
