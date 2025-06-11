@@ -29,10 +29,13 @@ export async function GET(request) {
 
     const searchParams = request.nextUrl.searchParams;
     const title = searchParams.get('title');
+    const page = parseInt(searchParams.get('page')) || 1;
+    const limit = parseInt(searchParams.get('limit')) || 10;
+
+    const skip = (page - 1) * limit;
 
     let topics;
     if (title) {
-        // Use a regex for case-insensitive partial match
         topics = await Topic.find({ title: { $regex: title, $options: 'i' } });
     } else {
         topics = await Topic.find();
